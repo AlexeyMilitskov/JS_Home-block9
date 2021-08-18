@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./M9_styles-3.css" />
+    <title>Задание 3</title>
+  </head>
+  <body>
+    <div class="container">
+      <input class="input" type="text" placeholder="введите число от 1 до 10" />
+      <button class="btn">отправить запрос</button>
+      <div class="result">здесь будет результат запроса</div>
+    </div>
+  </body>
+  <script>
+    function useRequest(url, callback) {
+      var xhr = new XMLHttpRequest();
+      console.log(url);
+      xhr.open("GET", url, true);
+
+      xhr.onload = function () {
+        if (xhr.status != 200) {
+          console.log("Статус ответа: ", xhr.status);
+        } else {
+          const result = JSON.parse(xhr.response);
+          if (callback) {
+            callback(result);
+          }
+        }
+      };
+
+      xhr.onerror = function () {
+        console.log("Ошибка! Статус ответа: ", xhr.status);
+      };
+
+      xhr.send();
+    }
+
+    const resultNode = document.querySelector(".result");
+    const btnNode = document.querySelector(".btn");
+
+    function displayResult(apiData) {
+      let cards = "";
+      apiData.forEach((item) => {
+        const cardBlock = `
+        <div class="card">
+        <img
+        src="${item.download_url}"
+        class="card-image"
+        />
+        <p>${item.author}</p>
+        </div>
+      `;
+        cards = cards + cardBlock;
+      });
+
+      resultNode.innerHTML = cards;
+    }
+
+    btnNode.addEventListener("click", () => {
+      const valueNum = document.querySelector(".input").value;
+      if (valueNum >= 1 && valueNum <= 10) {
+        useRequest(
+          `https://picsum.photos/v2/list?limit=${valueNum}`,
+          displayResult
+        );
+      } else {
+        resultNode.innerHTML = "число вне диапазона от 1 до 10";
+      }
+    });
+  </script>
+</html>

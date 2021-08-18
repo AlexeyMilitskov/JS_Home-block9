@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "NunitoSans-Regular";
+  src: url("./NunitoSans-Regular.ttf");
+}
+.btn {
+  height: 42px;
+  width: 200px;
+  background-color: coral;
+  color: black;
+  border-color: coral;
+  border-radius: 5px;
+  margin: 50px 0 0 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: NunitoSans-Regular;
+}
+.btn:hover {
+  box-shadow: 0px 2px 8px 2px rgba(141, 150, 178, 0.3);
+  transform: scale(1.05);
+}
+.result {
+  margin: 20px 0 0 50px;
+  font-size: 16px;
+  font-family: NunitoSans-Regular;
+}
+.input_width,
+.input_height {
+  height: 35px;
+  width: 220px;
+  padding-left: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border-color: black;
+  margin: 50px 0px 0 20px;
+  font-family: NunitoSans-Regular;
+}
+.result {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+}
+.card {
+  width: 200px;
+  margin: 20px;
+}
+.card-image {
+  display: block;
+  width: 200px;
+  height: 150px;
+}

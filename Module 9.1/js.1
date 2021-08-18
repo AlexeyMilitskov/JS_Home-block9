@@ -1,0 +1,65 @@
+const parser = new DOMParser();
+//console.log('parser', parser);
+
+const xmlString = `
+<list>
+	<student>
+		<name lang="en">
+			<first>Ivan</first>
+			<second>Ivanov</second>
+		</name>
+		<age>35</age>
+		<prof>teacher</prof>
+	</student>
+	<student>
+		<name lang="ru">
+			<first>Петр</first>
+			<second>Петров</second>
+		</name>
+		<age>58</age>
+		<prof>driver</prof>
+	</student>
+</list>
+`;
+//console.log('XMLString', XMLString);
+
+const xmlDOM = parser.parseFromString(xmlString, "text/xml");
+
+const listNode = xmlDOM.querySelector("list");
+
+const studentNode_1 = listNode.firstElementChild;
+const nameNode_1 = studentNode_1.querySelector("name");
+const firstNode_1 = nameNode_1.querySelector("first");
+const secondNode_1 = nameNode_1.querySelector("second");
+const ageNode_1 = studentNode_1.querySelector("age");
+const profNode_1 = studentNode_1.querySelector("prof");
+
+const studentNode_2 = listNode.lastElementChild;
+const nameNode_2 = studentNode_2.querySelector("name");
+const firstNode_2 = nameNode_2.querySelector("first");
+const secondNode_2 = nameNode_2.querySelector("second");
+const ageNode_2 = studentNode_2.querySelector("age");
+const profNode_2 = studentNode_2.querySelector("prof");
+
+const langAttr_1 = nameNode_1.getAttribute("lang");
+const langAttr_2 = nameNode_2.getAttribute("lang");
+
+let name_1 = `${secondNode_1.textContent} ${firstNode_1.textContent}`;
+const list_1 = {
+  name: name_1,
+  age: Number(ageNode_1.textContent),
+  prof: profNode_1.textContent,
+  lang: langAttr_1
+};
+
+let name_2 = `${secondNode_2.textContent} ${firstNode_2.textContent}`;
+const list_2 = {
+  name: name_2,
+  age: Number(ageNode_2.textContent),
+  prof: profNode_2.textContent,
+  lang: langAttr_2
+};
+const list = [list_1, list_2];
+
+console.log("list:", list_1, list_2);
+console.log("list:", list);
